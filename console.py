@@ -120,6 +120,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class name missing **")
             return
         elif args not in HBNBCommand.classes:
+            """split the arguments"""
             lst =args.split(" ")
             if lst[0] in HBNBCommand.classes:
                 new_instance = HBNBCommand.classes[lst[0]]()
@@ -128,6 +129,9 @@ class HBNBCommand(cmd.Cmd):
                     tmp = pair.split("=")
                     lst_val = tmp[1].split("_")
                     value = " ".join(item for item in lst_val)
+                    """Find quotes and escape them"""
+                    re.sub("\"", "\\\"", value, 2)
+                    """check if it is a potential number type"""
                     x = re.search("[0-9]", value)
                     if x:
                         if '.' in value:
